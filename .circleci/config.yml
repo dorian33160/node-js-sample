@@ -7,9 +7,6 @@ jobs:
     steps:
       - checkout  # Récupère le code source
 
-      - setup_remote_docker:  # Active Docker en mode distant
-          version: 20.10.14
-
       - run:
           name: Build Docker image
           command: |

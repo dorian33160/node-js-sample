@@ -8,10 +8,11 @@ jobs:
       - checkout  # Récupère le code source
 
       - run:
-          name: Installer Docker
+          name: Installer Docker proprement
           command: |
             sudo apt-get update
-            sudo apt-get install -y docker.io
+            sudo apt-get remove -y containerd docker docker.io
+            curl -fsSL https://get.docker.com | sudo bash
 
       - run:
           name: Build Docker image

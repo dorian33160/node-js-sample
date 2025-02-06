@@ -10,15 +10,12 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - docker/login: # 🔐 Se connecter à Docker Hub
+      - docker/publish:
+          image: micks33/my-image
+          tag: latest
+          registry: docker.io
           username: $DOCKER_LOGIN
           password: $DOCKER_PASSWORD
-      - docker/build: # 🛠 Build de l'image
-          image: micks33/my-image
-          tag: latest
-      - docker/push: # 🚀 Push de l'image sur Docker Hub
-          image: micks33/my-image
-          tag: latest
 
 workflows:
   version: 2

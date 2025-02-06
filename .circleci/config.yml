@@ -10,13 +10,13 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run:
-          name: Login to Docker Hub
-          command: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_LOGIN" --password-stdin
-      - docker/build:
+      - docker/login: # 🔐 Se connecter à Docker Hub
+          username: $DOCKER_LOGIN
+          password: $DOCKER_PASSWORD
+      - docker/build: # 🛠 Build de l'image
           image: micks33/my-image
           tag: latest
-      - docker/push:
+      - docker/push: # 🚀 Push de l'image sur Docker Hub
           image: micks33/my-image
           tag: latest
 

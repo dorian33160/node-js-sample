@@ -7,7 +7,7 @@ workflows:
   build-and-deploy:
     jobs:
       - docker/publish:
-          docker-paswword: DOCKER_PASSWORD
+          docker-password: DOCKER_PASSWORD
           docker-username: DOCKER_LOGIN
           image: my-dockerhub-username/my-image
           tag: latest

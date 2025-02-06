@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  docker: circleci/docker@2.4.0
+  docker: circleci/docker@2.8.2
 
 jobs:
   build-and-push:
@@ -13,9 +13,8 @@ jobs:
       - docker/publish:
           image: micks33/my-image
           tag: latest
-          registry: docker.io
-          username: $DOCKER_LOGIN
-          password: $DOCKER_PASSWORD
+          username: DOCKER_LOGIN
+          password: DOCKER_PASSWORD
 
 workflows:
   version: 2

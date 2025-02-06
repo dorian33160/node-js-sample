@@ -25,13 +25,6 @@ jobs:
             docker images
 
       - run:
-          name: Installer Docker proprement
-          command: |
-            sudo apt-get update
-            sudo apt-get remove -y containerd docker docker.io
-            curl -fsSL https://get.docker.com | sudo bash
-
-      - run:
           name: Lancer le conteneur en arrière-plan
           command: |
             docker run -d -p 8080:8080 --name test-container mon-app-node
@@ -47,13 +40,6 @@ jobs:
           command: |
             docker stop test-container
             docker rm test-container
-
-      - run:
-          name: Installer Docker proprement
-          command: |
-            sudo apt-get update
-            sudo apt-get remove -y containerd docker docker.io
-            curl -fsSL https://get.docker.com | sudo bash
 
       - run:
           name: Se connecter à Docker Hub

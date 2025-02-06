@@ -2,23 +2,12 @@ version: 2.1
 
 orbs:
   docker: circleci/docker@2.8.2
-
-jobs:
-  build-and-push:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - checkout
-      - setup_remote_docker
-      - docker/publish:
-          image: micks33/my-image
-          tag: latest
-          username: DOCKER_LOGIN
-          password: DOCKER_PASSWORD
-
+  
 workflows:
-  version: 2
   build-and-deploy:
     jobs:
-      - build-and-push:
-          context: docker-hub-creds
+      - docker/publish:
+          docker-paswword: DOCKER_PASSWORD
+          docker-username: DOCKER_LOGIN
+          image: my-dockerhub-username/my-image
+          tag: latest

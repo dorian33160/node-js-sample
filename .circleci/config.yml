@@ -8,6 +8,6 @@ workflows:
     jobs:
       - docker/publish:
           docker-password: DOCKER_PASSWORD
-          docker-username: DOCKER_LOGIN
+          docker-username: DOCKER_USERNAME
           image: my-dockerhub-username/my-image
           tag: latest

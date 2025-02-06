@@ -9,5 +9,5 @@ workflows:
       - docker/publish:
           docker-password: DOCKER_PASSWORD
           docker-username: DOCKER_USERNAME
-          image: my-dockerhub-username/my-image
+          image: micks33/my-image
           tag: latest

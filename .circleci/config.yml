@@ -24,8 +24,49 @@ jobs:
           command: |
             docker images
 
+      - run:
+          name: Installer Docker proprement
+          command: |
+            sudo apt-get update
+            sudo apt-get remove -y containerd docker docker.io
+            curl -fsSL https://get.docker.com | sudo bash
+
+      - run:
+          name: Lancer le conteneur en arrière-plan
+          command: |
+            docker run -d -p 8080:8080 --name test-container mon-app-node
+            sleep 5  # Laisse du temps au serveur pour démarrer
+
+      - run:
+          name: Vérifier que l'application répond
+          command: |
+            curl -f http://localhost:8080 || (docker logs test-container && exit 1)
+
+      - run:
+          name: Arrêter et supprimer le conteneur
+          command: |
+            docker stop test-container
+            docker rm test-container
+
+      - run:
+          name: Installer Docker proprement
+          command: |
+            sudo apt-get update
+            sudo apt-get remove -y containerd docker docker.io
+            curl -fsSL https://get.docker.com | sudo bash
+
+      - run:
+          name: Se connecter à Docker Hub
+          command: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+      - run:
+          name: Tag et Push l'image Docker
+          command: |
+            docker tag mon-app-node $DOCKER_USERNAME/mon-app-node:latest
+            docker push $DOCKER_USERNAME/mon-app-node:latest
+
 workflows:
   version: 2
-  build-and-push:
+  build-test-and-push:
     jobs:
       - build

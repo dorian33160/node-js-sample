@@ -10,14 +10,11 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run:
-          name: Login to Docker Hub
-          command: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_LOGIN" --password-stdin
       - docker/build:
-          image: my-dockerhub-username/my-image
+          image: micks33/my-image
           tag: latest
       - docker/push:
-          image: my-dockerhub-username/my-image
+          image: micks33/my-image
           tag: latest
 
 workflows:
